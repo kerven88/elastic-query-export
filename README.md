@@ -2,18 +2,38 @@
 
 Export Data from ElasticSearch to CSV by Raw or Lucene Query (e.g. from Kibana).
 Works with ElasticSearch 6+ (OpenSearch works too) and makes use of ElasticSearch's Scroll API and Go's
-concurrency possibilities to work as fast as possible.
+concurrency features to work as fast as possible.
 
 ## Install
 
 Download a pre-compiled binary for your operating system from here: https://github.com/pteich/elastic-query-export/releases
 You need just this binary. It works on OSX (Darwin), Linux and Windows.
 
-### Arch
+There are also prebuilt RPM, DEB and APK packages for your Linux distribution.
+
+### Brew
+
+Use Brew to install:
+```shell
+brew tap pteich/tap
+brew install elastic-query-export
+```
+
+### Arch AUR
 
 ```shell
 yay -S elastic-query-export-bin
 ```
+
+### Docker
+
+A Docker image is available here: https://github.com/pteich/elastic-query-export/pkgs/container/elastic-query-export
+It can be used just like the locally installed binary: 
+
+```shell
+docker run ghcr.io/pteich/elastic-query-export:1.6.2 -h
+```
+
 
 ## General usage
 
@@ -37,7 +57,7 @@ es-query-export -c "http://localhost:9200" -i "logstash-*" --start="2019-04-04T1
 | `-s --start`     |                       | optional start date - Format: YYYY-MM-DDThh:mm:ss.SSSZ. or any other Elasticsearch default format       |
 | `-e --end`       |                       | optional end date - Format: YYYY-MM-DDThh:mm:ss.SSSZ. or any other Elasticsearch default format         |
 | `--timefield`    |                       | optional time field to use, default to @timestamp                                                       |
-| `--verifySSL`    | true                  | optional define how to handle SSL certificates                                                          |
+| `--verifySSL`    | false                 | optional define how to handle SSL certificates                                                          |
 | `--user`         |                       | optional username                                                                                       |
 | `--pass`         |                       | optional password                                                                                       |
 | `--size`         | 1000                  | size of the scroll window, the more the faster the export works but it adds more pressure on your nodes |
